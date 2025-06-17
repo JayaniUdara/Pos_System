@@ -15,10 +15,12 @@ Route::get('/pos-dashboard', function () {
 
 // Items Resource Routes
 Route::controller(ItemController::class)->prefix('items')->group(function() {
-    Route::get('/', 'index')->name('items.index');
     Route::get('/getItems', 'getItems')->name('items.getItems'); // DataTables AJAX route
-    Route::post('/', 'store')->name('items.store');
     Route::get('/{id}/edit', 'edit')->name('items.edit');
     Route::put('/{id}', 'update')->name('items.update');
     Route::delete('/{id}', 'destroy')->name('items.destroy');
 });
+
+Route::post('/items', [ItemController::class, 'store'])->name('items.store');
+Route::get('/items', [ItemController::class, 'index'])->name('items.index');
+
